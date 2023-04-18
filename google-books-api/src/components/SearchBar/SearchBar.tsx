@@ -91,6 +91,7 @@ const SearchBar: React.FC = () => {
             className="searchbar_form_input"
             type="text"
             value={query}
+            aria-label="Search input"
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for your next book here..."
           />
