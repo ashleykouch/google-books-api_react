@@ -20,6 +20,50 @@ const SearchBar: React.FC = () => {
   // create react states
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
+  const [sortOption, setSortOption] = useState("relevance");
+
+  // create function for sorting books
+  const sortBooks = (books: Book[], option: string): Book[] => {
+    const sortedBooks = [...books];
+
+    // sorting cases
+    switch (option) {
+      case "title_asc":
+        return sortedBooks.sort((a, b) =>
+          a.volumeInfo.title.localeCompare(b.volumeInfo.title)
+        );
+      case "title_desc":
+        return sortedBooks.sort((a, b) =>
+          b.volumeInfo.title.localeCompare(a.volumeInfo.title)
+        );
+      case "auth_asc":
+        return sortedBooks.sort((a, b) => {
+          const authA = a.volumeInfo.authors?.[0] || "";
+          const authB = b.volumeInfo.authors?.[0] || "";
+          return authA.localeCompare(authB);
+        });
+      case "auth_desc":
+        return sortedBooks.sort((a, b) => {
+          const authA = a.volumeInfo.authors?.[0] || "";
+          const authB = b.volumeInfo.authors?.[0] || "";
+          return authB.localeCompare(authA);
+        });
+      case "date_asc":
+        return sortedBooks.sort((a, b) => {
+          const dateA = a.volumeInfo.publishedDate || "";
+          const dateB = b.volumeInfo.publishedDate || "";
+          return dateA.localeCompare(dateB);
+        });
+      case "date_desc":
+        return sortedBooks.sort((a, b) => {
+          const dateA = a.volumeInfo.publishedDate || "";
+          const dateB = b.volumeInfo.publishedDate || "";
+          return dateB.localeCompare(dateA);
+        });
+      default:
+        return books;
+    }
+  };
 
   // create function for restful api using google books
 
@@ -29,8 +73,8 @@ const SearchBar: React.FC = () => {
     const response = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${query}`
     );
-    setBooks(response.data.items);
-    console.log(response.data.items);
+    const sorted = sortBooks(response.data.items, sortOption);
+    setBooks(sorted);
   };
 
   return (
@@ -53,6 +97,19 @@ const SearchBar: React.FC = () => {
           <button type="submit" className="searchbar_button">
             Search
           </button>
+          <select
+            className="searchbar_filter"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="relevance">Relevance</option>
+            <option value="title_asc">Title (A-Z)</option>
+            <option value="title_desc">Title (Z-A)</option>
+            <option value="auth_asc">Author (A-Z)</option>
+            <option value="auth_desc">Author (Z-A)</option>
+            <option value="date_asc">Date (A-Z)</option>
+            <option value="date_desc">Date (Z-A)</option>
+          </select>
         </form>
       </div>
       <div>{books.length > 0 && <CardContainer books={books} />}</div>
