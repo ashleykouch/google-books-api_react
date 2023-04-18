@@ -83,7 +83,7 @@ const SearchBar: React.FC = () => {
         <div className="searchbar_title">
           <h1 className="searchbar_title_header">Searching for a Book?</h1>
           <h3 className="searchbar_title_subheader">
-            libraryOfBooks holds an endless library to find your next read
+            libraryOfBooks holds an endless library to find your next read!
           </h3>
         </div>
         <form onSubmit={searchBooks} className="searchbar_form">

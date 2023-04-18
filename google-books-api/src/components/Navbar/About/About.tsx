@@ -6,7 +6,7 @@ import "./About.scss";
 const About = () => {
   return (
     <section className="about">
-      <div className="container">
+      <div className="about-container">
         <Link to="/" className="back_link">
           Back
         </Link>
