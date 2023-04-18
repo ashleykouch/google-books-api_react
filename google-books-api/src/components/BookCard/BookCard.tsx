@@ -7,9 +7,9 @@ interface Book {
   id: string;
   volumeInfo: {
     title: string;
-    authors: string[];
+    authors?: string[];
     publishedDate: string;
-    imageLinks: {
+    imageLinks?: {
       thumbnail: string;
     };
   };
@@ -24,9 +24,13 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
     <tr className="bookcard_row">
       <td>
         <img
-          src={book.volumeInfo.imageLinks?.thumbnail || cover}
+          src={
+            book.volumeInfo.imageLinks?.thumbnail ||
+            "https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png"
+          }
           alt={book.volumeInfo.title}
           className="bookcard_img"
+          data-testid="book-img"
         />
       </td>
       <td>{book.id}</td>
