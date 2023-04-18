@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Contact.scss";
 import { Link } from "react-router-dom";
 
 const Contact: React.FC = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
   return (
     <div className="contact-page">
       <div className="contact-container">
@@ -20,6 +24,8 @@ const Contact: React.FC = () => {
             type="text"
             id="name"
             name="name"
+            aria-label="Name"
+            onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
             required
           />
@@ -29,6 +35,8 @@ const Contact: React.FC = () => {
             type="email"
             id="email"
             name="email"
+            aria-label="Email"
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email"
             required
           />
@@ -37,6 +45,8 @@ const Contact: React.FC = () => {
           <textarea
             id="message"
             name="message"
+            aria-label="Message"
+            onChange={(e) => setMessage(e.target.value)}
             rows={6}
             placeholder="Your message"
             required
