@@ -73,4 +73,5 @@ button:focus-visible {
 * {
   font-family: "Chivo Mono", monospace;
   background-color: #f9f9f7;
+  margin: 5px;
 }

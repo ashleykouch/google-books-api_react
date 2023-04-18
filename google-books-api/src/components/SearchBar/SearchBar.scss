@@ -4,9 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 
   &_title {
-    width: 600px;
+    width: 650px;
     &_header {
       font-size: 40px;
     }
@@ -16,7 +17,7 @@
   }
 
   &_form {
-    width: 600px;
+    width: 650px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

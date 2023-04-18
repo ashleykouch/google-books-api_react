@@ -5,6 +5,8 @@ import BookDetails from "./components/BookDetails/BookDetails";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import About from "./components/Navbar/About/About";
 import Contact from "./components/Navbar/Contact/Contact";
+import BookCard from "./components/BookCard/BookCard";
+import CardContainer from "./components/CardContainer/CardContainer";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +19,7 @@ const App: React.FC = () => {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
         </Switch>
+        {/* <CardContainer books={[]} /> */}
       </Router>
     </div>
   );
