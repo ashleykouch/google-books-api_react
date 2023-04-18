@@ -32,19 +32,24 @@ const SearchBar: React.FC = () => {
 
   return (
     <div className="searchbar">
-      <div className="searchbar_header">
-        <h1>Searching for a Book?</h1>
-        <h3>libraryOfBooks holds an endless library to find your next read</h3>
+      <div className="searchbar_title">
+        <h1 className="searchbar_title_header">Searching for a Book?</h1>
+        <h3 className="searchbar_title_subheader">
+          libraryOfBooks holds an endless library to find your next read
+        </h3>
       </div>
 
-      <form onSubmit={searchBooks}>
+      <form onSubmit={searchBooks} className="searchbar_form">
         <input
+          className="searchbar_form_input"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for your next book here..."
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="searchbar_button">
+          Search
+        </button>
       </form>
 
       <div className="books-container">
