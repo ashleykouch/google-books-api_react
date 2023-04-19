@@ -7,7 +7,7 @@ const About = () => {
   return (
     <section className="about">
       <div className="about-container">
-        <Link to="/" className="back_link">
+        <Link to="/" className="detail-back_link">
           Back
         </Link>
 

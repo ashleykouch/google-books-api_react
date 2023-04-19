@@ -69,7 +69,7 @@ const BookDetails: React.FC = () => {
 
   return (
     <>
-      <Link to="/" className="back_link">
+      <Link to="/" className="detail-back_link">
         Back
       </Link>
       <div className="book_item-title">

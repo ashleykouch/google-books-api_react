@@ -19,6 +19,18 @@ $mobile-breakpoint: 768px;
   }
 }
 
+.detail-back_link {
+  margin-left: 55px;
+  font-size: 24px;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: #219ebc;
+    text-decoration: underline;
+  }
+}
+
 @media (max-width: $mobile-breakpoint) {
   .about {
     &-content {
