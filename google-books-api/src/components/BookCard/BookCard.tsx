@@ -22,7 +22,7 @@ interface BookCardProps {
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
     <tr className="bookcard_row" data-testid="book-card">
-      <td>
+      <td className="cover-cell">
         <img
           src={
             book.volumeInfo.imageLinks?.thumbnail ||
@@ -33,7 +33,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           data-testid="book-img"
         />
       </td>
-      <td>{book.id}</td>
+      <td className="id-cell">{book.id}</td>
       <td>{book.volumeInfo.title}</td>
       <td>{book.volumeInfo.authors?.join(",") || "Unknown author"}</td>
       <td>{book.volumeInfo.publishedDate}</td>

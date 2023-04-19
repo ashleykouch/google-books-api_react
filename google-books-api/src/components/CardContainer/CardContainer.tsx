@@ -25,8 +25,8 @@ const CardContainer: React.FC<CardContainerProps> = ({ books }) => {
       <table>
         <thead>
           <tr>
-            <th>COVER</th>
-            <th>BOOK ID</th>
+            <th className="cover-cell">COVER</th>
+            <th className="id-cell">BOOK ID</th>
             <th>TITLE</th>
             <th>AUTHOR/S</th>
             <th>PUBLISHED DATE</th>
