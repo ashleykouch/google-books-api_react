@@ -64,18 +64,10 @@ Here are the steps to set up the project:
 
 1. Clone the repository to your local machine.
 2. Open the repository in visual studio code.
-3. Navigate to "books-api" using the Command Line Interface (CLI) and run "npm install" to install the necessary dependencies, followed by "npm run dev" to start the development server.
+3. Navigate to "google-books-api" using the Command Line Interface (CLI) and run "npm install" to install the necessary dependencies, followed by "npm run dev" to start the development server.
 4. Open the Google Chrome browser and copy the local link provided in the command line into the browser search bar to view the application. Alternatively, press the link directory in the command line to open the browser holding "cmd" on mac or "ctrl" on windows whilst clicking the link.
 
 ---
-
-## Design Goals / Approach
-
-The goals of the project was to create an application that focused on the user's needs and goals in which the user interface should be designed in a way that allows users ot easily search for books, view book details, and navigate between pages.
-
-The design was kept minimal so that it is simple and easy to understand and unnecessary features and functionality should be avoided to keep the interface clean and clutter-free.
-
-Additionally, the design was created to work on a variety of devices and screen sizes.
 
 ## Design Goals
 
@@ -90,7 +82,7 @@ The goals of the project was to create an application that focuses on the user's
    b. Utilising interfaces for data models, API responses, and component props to enforce consistency and reduce potential bugs.
    c. Implement unit tests and integration tests using Jest and React Testing Library to ensure the application's reliability and stability.
 
-## By following this design goal and approach, the project will deliver a user-friendly and efficient application for searching and viewing book details, while ensuring code maintainability and scalability.
+By following this design goal and approach, the project will deliver a user-friendly and efficient application for searching and viewing book details, while ensuring code maintainability and scalability.
 
 ## Features
 
