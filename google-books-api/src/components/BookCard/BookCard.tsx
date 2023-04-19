@@ -21,7 +21,7 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
-    <tr className="bookcard_row">
+    <tr className="bookcard_row" data-testid="book-card">
       <td>
         <img
           src={

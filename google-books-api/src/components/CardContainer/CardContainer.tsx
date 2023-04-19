@@ -35,7 +35,7 @@ const CardContainer: React.FC<CardContainerProps> = ({ books }) => {
         </thead>
         <tbody>
           {books.map((book) => (
-            <BookCard key={book.id} book={book} />
+            <BookCard key={book.id} book={book} data-testid="book-card" />
           ))}
         </tbody>
       </table>
