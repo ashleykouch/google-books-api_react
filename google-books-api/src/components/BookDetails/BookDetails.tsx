@@ -20,17 +20,41 @@ interface Book {
 const BookDetails: React.FC = () => {
   const [book, setBook] = useState<Book | null>(null);
   const { id } = useParams<{ id: string }>();
+  const [error, setError] = useState<string | null>(null);
+
+  // useEffect(() => {
+  //   const bookDetails = async () => {
+  //     const response = await axios.get(
+  //       `https://www.googleapis.com/books/v1/volumes/${id}`
+  //     );
+  //     setBook(response.data);
+  //     console.log(response.data);
+  //   };
+  //   bookDetails();
+  // }, [id]);
 
   useEffect(() => {
-    const bookDetails = async () => {
-      const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes/${id}`
-      );
-      setBook(response.data);
-      console.log(response.data);
-    };
-    bookDetails();
+    (async () => {
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/books/v1/volumes/${id}`
+        );
+        setBook(response.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+          setBook(null);
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      }
+    })();
   }, [id]);
+
+  if (error) {
+    return <span data-testid="error-message">{error}</span>;
+  }
 
   if (!book) {
     return <div>Loading...</div>;
