@@ -1,3 +1,5 @@
+$mobile-breakpoint: 768px;
+
 .book_item {
   &-details {
     width: 80%;
@@ -41,5 +43,53 @@
   &:hover {
     color: #219ebc;
     text-decoration: underline;
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .book_item {
+    &-details {
+      flex-direction: column;
+      height: auto;
+      margin-left: 0;
+      margin-top: 30px;
+      align-items: center;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    &-img {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-img img {
+      width: 80%;
+      height: auto;
+    }
+
+    &-content {
+      margin-left: 0;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    &-title {
+      margin-left: 0;
+      margin-top: 30px;
+      text-align: center;
+
+      & h2 {
+        font-size: 35px;
+      }
+    }
+  }
+
+  .back_link {
+    margin-left: 0;
+    font-size: 20px;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
