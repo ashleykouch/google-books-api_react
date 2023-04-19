@@ -1,3 +1,5 @@
+$mobile-breakpoint: 768px;
+
 .searchbar {
   height: 60vh;
   display: flex;
@@ -64,6 +66,35 @@
     &:hover {
       background-color: #219ebc;
       color: white;
+    }
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .searchbar {
+    &_title {
+      width: 100%;
+      text-align: center;
+      padding: 0.15px;
+
+      &_header {
+        font-size: 30px;
+      }
+
+      &subheader {
+        font-size: 18px;
+      }
+    }
+
+    &_form {
+      width: 100%;
+      flex-direction: column;
+      padding: 0 15px;
+
+      &_input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+$mobile-breakpoint: 768px;
+
 .nav-wrapper {
   display: flex;
   flex-direction: row;
@@ -45,3 +47,39 @@
     color: black;
   }
 }
+
+// add hamburger-menu
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+
+  &_line {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
+  }
+}
+
+// @media (max-width: $mobile-breakpoint) {
+//   .nav-links {
+//     display: none;
+//   }
+
+//   .hamburger-menu {
+//     display: flex;
+//   }
+// }
+
+// .nav-links.open {
+//   display: flex !important;
+//   flex-direction: column;
+//   align-items: center;
+//   position: absolute;
+//   top: 100%;
+//   left: 0;
+//   right: 0;
+//   background-color: black;
+//   z-index: 1;
+// }
