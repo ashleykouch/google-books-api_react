@@ -1,3 +1,5 @@
+$mobile-breakpoint: 768px;
+
 .contact-page {
   width: 80%;
   margin: 0 auto;
@@ -51,4 +53,12 @@
 
 .contact-container h2 {
   margin-top: 50px;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .contact-form {
+    button {
+      width: 100%;
+    }
+  }
 }
