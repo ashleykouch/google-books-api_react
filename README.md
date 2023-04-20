@@ -94,6 +94,8 @@ By following this design goal and approach, the project will deliver a user-frie
 
 ## Known issues
 
+- Contact form is for display and does not yet collect data
+
 ---
 
 ## Future Goals
@@ -102,6 +104,7 @@ By following this design goal and approach, the project will deliver a user-frie
 - Add more error handling.
 - User authentication to save search history or favourite books.
 - User feedback so users can provide comments or ratings on books.
+- Further testing
 
 ---
 
