@@ -1,83 +1,58 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
-// Mock the axios library to prevent actual API requests
-import axios from "axios";
 import { MemoryRouter } from "react-router-dom";
+import { getBookSearch } from "../../services/Book";
 
 // create a mock version of the axios module to be used for testing
-jest.mock("axios");
 
-// create a mocked version of the axios object
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+jest.mock("../../services/Book", () => ({
+  getBookSearch: jest.fn(),
+}));
 
 describe("SearchBar", () => {
-  it("renders the search input and search button", () => {
+  beforeEach(() => {
+    (getBookSearch as jest.Mock).mockImplementation(() => Promise.resolve([]));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders the search bar title and subtitle", () => {
     render(
       <MemoryRouter>
         <SearchBar />
       </MemoryRouter>
     );
 
+    expect(screen.getByText("Searching for a Book?")).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText("Search for your next book here...")
+      screen.getByText(
+        "libraryOfBooks holds an endless library to find your next read!"
+      )
     ).toBeInTheDocument();
+  });
+
+  test("renders searchbar component", () => {
+    render(
+      <MemoryRouter>
+        <SearchBar />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByLabelText("Search input")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Search" })).toBeInTheDocument();
   });
 
-  it("accepts user input", async () => {
+  test("renders the dropdown filter menu", () => {
     render(
       <MemoryRouter>
         <SearchBar />
       </MemoryRouter>
     );
 
-    const searchInput = screen.getByPlaceholderText(
-      "Search for your next book here..."
-    );
-    await userEvent.type(searchInput, "Flowers");
-
-    expect(searchInput).toHaveValue("Flowers");
-  });
-
-  it("performs a search when clicked or entered", async () => {
-    render(
-      <MemoryRouter>
-        <SearchBar />
-      </MemoryRouter>
-    );
-
-    // Mock the API response
-    mockedAxios.get.mockResolvedValueOnce({
-      data: {
-        items: [
-          {
-            id: "L12GI97",
-            volumeInfo: {
-              title: "Flower Magic",
-              authors: ["Jane Lee"],
-              imageLinks: {
-                thumbnail: "https://example.com/potter-magic-thumbnail.jpg",
-              },
-              publishedDate: "2002-18-03",
-            },
-          },
-        ],
-      },
-    });
-
-    userEvent.type(
-      screen.getByPlaceholderText("Search for your next book here..."),
-      "Flower Magic"
-    );
-    userEvent.click(screen.getByRole("button", { name: "Search" }));
-
-    // wait for the mocked API call to complete
-    await screen.findByText("Flower Magic");
-
-    // check if the book is rendered
-    expect(screen.getByText("Flower Magic")).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 });

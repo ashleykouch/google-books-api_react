@@ -1,23 +1,24 @@
 import React from "react";
 import BookCard from "../BookCard/BookCard";
 import "./CardContainer.scss";
+import { BookSearch } from "../../services/Book";
 
 // the interface defines the structure of the book object and is used to store and manage information fetched from the Google Books API
-interface Book {
-  id: string;
-  volumeInfo: {
-    title: string;
-    authors: string[];
-    publishedDate: string;
-    imageLinks: {
-      thumbnail: string;
-    };
-  };
-}
+// interface Book {
+//   id: string;
+//   volumeInfo: {
+//     title: string;
+//     authors: string[];
+//     publishedDate: string;
+//     imageLinks: {
+//       thumbnail: string;
+//     };
+//   };
+// }
 
 // the interface is used to define the expected properties the BookCard component and represents the information of the above object that will be passed down as a prop.
 interface CardContainerProps {
-  books: Book[];
+  books: BookSearch[];
 }
 
 // using React.FC (functional component) automatically includes children props in type definition

@@ -1,64 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import BookCard from "../BookCard/BookCard";
 import "./SearchBar.scss";
 import CardContainer from "../CardContainer/CardContainer";
+import { BookSearch, getBookSearch } from "../../services/Book";
 
-interface Book {
-  id: string;
-  volumeInfo: {
-    title: string;
-    authors: string[];
-    publishedDate: string;
-    imageLinks: {
-      thumbnail: string;
-    };
+// interface Book {
+//   id: string;
+//   volumeInfo: {
+//     title: string;
+//     authors: string[];
+//     publishedDate: string;
+//     imageLinks: {
+//       thumbnail: string;
+//     };
+//   };
+// }
+
+const SearchBarComponent = ({ onSubmit }: any) => {
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: any) => {
+    console.log(e);
+    e.preventDefault();
+    onSubmit(searchRef?.current?.value);
   };
-}
+
+  return (
+    <form className="searchbar_form" onSubmit={handleSubmit}>
+      <input
+        className="searchbar_form_input"
+        type="text"
+        ref={searchRef}
+        aria-label="Search input"
+        placeholder="Search for your next book here..."
+      />
+      <button className="searchbar_button">Search</button>
+    </form>
+  );
+};
 
 const SearchBar: React.FC = () => {
   // create react states
   const [query, setQuery] = useState("");
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<BookSearch[]>([]);
   const [sortOption, setSortOption] = useState("relevance");
 
   // create function for sorting books
-  const sortBooks = (books: Book[], option: string): Book[] => {
+  const sortBooks = (books: BookSearch[], option: string): BookSearch[] => {
     const sortedBooks = [...books];
 
     // sorting cases
     switch (option) {
       case "title_asc":
-        return sortedBooks.sort((a, b) =>
-          a.volumeInfo.title.localeCompare(b.volumeInfo.title)
-        );
+        return sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
       case "title_desc":
-        return sortedBooks.sort((a, b) =>
-          b.volumeInfo.title.localeCompare(a.volumeInfo.title)
-        );
+        return sortedBooks.sort((a, b) => b.title.localeCompare(a.title));
       case "auth_asc":
         return sortedBooks.sort((a, b) => {
-          const authA = a.volumeInfo.authors?.[0] || "";
-          const authB = b.volumeInfo.authors?.[0] || "";
-          return authA.localeCompare(authB);
+          return a.author.localeCompare(b.author);
         });
       case "auth_desc":
         return sortedBooks.sort((a, b) => {
-          const authA = a.volumeInfo.authors?.[0] || "";
-          const authB = b.volumeInfo.authors?.[0] || "";
-          return authB.localeCompare(authA);
+          return b.author.localeCompare(a.author);
         });
       case "date_asc":
         return sortedBooks.sort((a, b) => {
-          const dateA = a.volumeInfo.publishedDate || "";
-          const dateB = b.volumeInfo.publishedDate || "";
-          return dateA.localeCompare(dateB);
+          return a.published.localeCompare(b.published);
         });
       case "date_desc":
         return sortedBooks.sort((a, b) => {
-          const dateA = a.volumeInfo.publishedDate || "";
-          const dateB = b.volumeInfo.publishedDate || "";
-          return dateB.localeCompare(dateA);
+          return b.published.localeCompare(a.published);
         });
       default:
         return books;
@@ -70,12 +82,25 @@ const SearchBar: React.FC = () => {
   // applying event handler
   const searchBooks = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}`
-    );
-    const sorted = sortBooks(response.data.items, sortOption);
+
+    const response = await getBookSearch(query);
+    const sorted = sortBooks(response, sortOption);
     setBooks(sorted);
   };
+
+  useEffect(() => {
+    if (query == "") {
+      return;
+    }
+
+    const wrapper = async () => {
+      const response = await getBookSearch(query);
+      const sorted = sortBooks(response, sortOption);
+      setBooks(sorted);
+    };
+
+    wrapper();
+  }, [sortOption, query]);
 
   return (
     <>
@@ -86,18 +111,23 @@ const SearchBar: React.FC = () => {
             libraryOfBooks holds an endless library to find your next read!
           </h3>
         </div>
-        <form onSubmit={searchBooks} className="searchbar_form">
-          <input
-            className="searchbar_form_input"
-            type="text"
-            value={query}
-            aria-label="Search input"
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for your next book here..."
-          />
-          <button type="submit" className="searchbar_button">
-            Search
-          </button>
+        {/* <form onSubmit={searchBooks} className="searchbar_form">
+                    <input
+                        className="searchbar_form_input"
+                        type="text"
+                        value={query}
+                        aria-label="Search input"
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Search for your next book here..."
+                    />
+                    <button type="submit" className="searchbar_button">
+                        Search
+    </button> */}
+        <SearchBarComponent
+          aria-label="Search form"
+          onSubmit={(search: string) => setQuery(search)}
+        />
+        <form>
           <select
             className="searchbar_filter"
             value={sortOption}

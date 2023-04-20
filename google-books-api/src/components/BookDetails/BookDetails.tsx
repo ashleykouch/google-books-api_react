@@ -54,7 +54,7 @@ const BookDetails: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  // description contained HTML tags and therefore the below code is used to remove them from the default descriptions
+  // description contained HTML tags and therefore the below code is used to remove them from the description
   const stripHtmlTags = (str: string) => {
     if (!str) return "";
     const tmp = document.createElement("DIV");

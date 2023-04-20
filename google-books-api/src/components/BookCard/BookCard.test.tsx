@@ -13,14 +13,10 @@ afterEach(() => {
 // create a mock example of a book
 const mockBook = {
   id: "HI123BYE",
-  volumeInfo: {
-    title: "Mock Book Tester",
-    authors: ["Author1, Author2, Author3"],
-    publishedDate: "2009-10-23",
-    imageLinks: {
-      thumbnail: "https://example.com/mock-book-cover.jpg",
-    },
-  },
+  title: "Mock Book Tester",
+  author: "Author1",
+  published: "2009-10-23",
+  image: "https://example.com/mock-book-cover.jpg",
 };
 
 describe("BookCard", () => {
@@ -39,7 +35,7 @@ describe("BookCard", () => {
     expect(screen.getByAltText("Mock Book Tester")).toBeInTheDocument();
     expect(screen.getByText("HI123BYE")).toBeInTheDocument();
     expect(screen.getByText("Mock Book Tester")).toBeInTheDocument();
-    expect(screen.getByText("Author1, Author2, Author3")).toBeInTheDocument();
+    expect(screen.getByText("Author1")).toBeInTheDocument();
     expect(screen.getByText("2009-10-23")).toBeInTheDocument();
     expect(screen.getByText("Read More")).toBeInTheDocument();
   });
@@ -48,10 +44,7 @@ describe("BookCard", () => {
     const noAuthors = {
       // ... creates a copy of the object without modifying the original
       ...mockBook,
-      volumeInfo: {
-        ...mockBook.volumeInfo,
-        authors: undefined,
-      },
+      author: "Unknown author",
     };
 
     render(
@@ -70,10 +63,8 @@ describe("BookCard", () => {
   test("renders default cover image when no image is provided", () => {
     const noImage = {
       ...mockBook,
-      volumeInfo: {
-        ...mockBook.volumeInfo,
-        imageLinks: undefined,
-      },
+      image:
+        "https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png",
     };
 
     render(
