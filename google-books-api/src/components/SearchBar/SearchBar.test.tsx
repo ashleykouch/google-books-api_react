@@ -7,7 +7,10 @@ import SearchBar from "./SearchBar";
 import axios from "axios";
 import { MemoryRouter } from "react-router-dom";
 
+// create a mock version of the axios module to be used for testing
 jest.mock("axios");
+
+// create a mocked version of the axios object
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("SearchBar", () => {
@@ -34,9 +37,9 @@ describe("SearchBar", () => {
     const searchInput = screen.getByPlaceholderText(
       "Search for your next book here..."
     );
-    await userEvent.type(searchInput, "Potter");
+    await userEvent.type(searchInput, "Flowers");
 
-    expect(searchInput).toHaveValue("Potter");
+    expect(searchInput).toHaveValue("Flowers");
   });
 
   it("performs a search when clicked or entered", async () => {
@@ -53,7 +56,7 @@ describe("SearchBar", () => {
           {
             id: "L12GI97",
             volumeInfo: {
-              title: "Potter Magic",
+              title: "Flower Magic",
               authors: ["Jane Lee"],
               imageLinks: {
                 thumbnail: "https://example.com/potter-magic-thumbnail.jpg",
@@ -67,14 +70,14 @@ describe("SearchBar", () => {
 
     userEvent.type(
       screen.getByPlaceholderText("Search for your next book here..."),
-      "Potter Magic"
+      "Flower Magic"
     );
     userEvent.click(screen.getByRole("button", { name: "Search" }));
 
     // wait for the mocked API call to complete
-    await screen.findByText("Potter Magic");
+    await screen.findByText("Flower Magic");
 
     // check if the book is rendered
-    expect(screen.getByText("Potter Magic")).toBeInTheDocument();
+    expect(screen.getByText("Flower Magic")).toBeInTheDocument();
   });
 });

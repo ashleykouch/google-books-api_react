@@ -1,10 +1,16 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import BookCard from "./BookCard";
 
-// create a mock example of a book
+// ensure the test environment is cleaned and reset for the next test
 
+afterEach(() => {
+  cleanup();
+  jest.resetAllMocks();
+});
+
+// create a mock example of a book
 const mockBook = {
   id: "HI123BYE",
   volumeInfo: {
@@ -16,8 +22,6 @@ const mockBook = {
     },
   },
 };
-
-jest.mock("../../assets/no-cover.jpeg", () => "mock-no-cover-image.jpeg");
 
 describe("BookCard", () => {
   test("renders book information correctly", () => {
@@ -31,6 +35,7 @@ describe("BookCard", () => {
       </Router>
     );
 
+    // expect results based on the created mock book above
     expect(screen.getByAltText("Mock Book Tester")).toBeInTheDocument();
     expect(screen.getByText("HI123BYE")).toBeInTheDocument();
     expect(screen.getByText("Mock Book Tester")).toBeInTheDocument();
@@ -41,6 +46,7 @@ describe("BookCard", () => {
 
   test("renders 'Unknown author' when no authors are provided", () => {
     const noAuthors = {
+      // ... creates a copy of the object without modifying the original
       ...mockBook,
       volumeInfo: {
         ...mockBook.volumeInfo,

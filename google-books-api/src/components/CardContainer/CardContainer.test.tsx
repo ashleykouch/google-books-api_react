@@ -18,6 +18,7 @@ interface Book {
 
 describe("CardContainer", () => {
   test("renders CardContainer component without crashing", () => {
+    // initialise the const as an empty array so that it returns the required object keys/values
     const mockBook: Book[] = [];
     render(
       <MemoryRouter>

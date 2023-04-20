@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./BookCard.scss";
 import cover from "../../assets/no-cover.jpeg";
 
+// the interface defines the structure of the book object and is used to store and manage information fetched from the Google Books API
 interface Book {
   id: string;
   volumeInfo: {
@@ -15,9 +16,12 @@ interface Book {
   };
 }
 
+// the interface is used to define the expected properties the BookCard component and represents the information of the above object that will be passed down as a prop.
 interface BookCardProps {
   book: Book;
 }
+
+// using React.FC (functional component) automatically includes children props in type definition and also checks for default probs and has a implicit return type of element | null
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
@@ -43,15 +47,6 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         </Link>
       </td>
     </tr>
-
-    // <div className="bookcard_container">
-    //   <p>{book.id}</p>
-    //   <p>{book.volumeInfo.title}</p>
-    //   <p>{book.volumeInfo.authors?.join(", ") || "Author unknown"}</p>
-    //   <p>{book.volumeInfo.publishedDate}</p>
-    //   <Link to={`/book/${book.id}`} className="book-details">
-    //     <h3>Read More</h3>
-    //   </Link>
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import BookCard from "../BookCard/BookCard";
 import "./CardContainer.scss";
 
+// the interface defines the structure of the book object and is used to store and manage information fetched from the Google Books API
 interface Book {
   id: string;
   volumeInfo: {
@@ -14,9 +15,12 @@ interface Book {
   };
 }
 
+// the interface is used to define the expected properties the BookCard component and represents the information of the above object that will be passed down as a prop.
 interface CardContainerProps {
   books: Book[];
 }
+
+// using React.FC (functional component) automatically includes children props in type definition
 
 const CardContainer: React.FC<CardContainerProps> = ({ books }) => {
   return (
@@ -34,6 +38,7 @@ const CardContainer: React.FC<CardContainerProps> = ({ books }) => {
           </tr>
         </thead>
         <tbody>
+          {/* iterate over the book array */}
           {books.map((book) => (
             <BookCard key={book.id} book={book} data-testid="book-card" />
           ))}
