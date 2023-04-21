@@ -111,18 +111,7 @@ const SearchBar: React.FC = () => {
             libraryOfBooks holds an endless library to find your next read!
           </h3>
         </div>
-        {/* <form onSubmit={searchBooks} className="searchbar_form">
-                    <input
-                        className="searchbar_form_input"
-                        type="text"
-                        value={query}
-                        aria-label="Search input"
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search for your next book here..."
-                    />
-                    <button type="submit" className="searchbar_button">
-                        Search
-    </button> */}
+
         <SearchBarComponent
           aria-label="Search form"
           onSubmit={(search: string) => setQuery(search)}
