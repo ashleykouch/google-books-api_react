@@ -1,0 +1,58 @@
+$mobile-breakpoint: 768px;
+
+.bookcard {
+  &_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+  }
+
+  &_img {
+    width: 50px;
+    height: 70px;
+  }
+
+  &_row {
+    overflow-x: auto;
+  }
+}
+
+.book-details {
+  color: black;
+  text-decoration: none;
+  background-color: #fafafa;
+
+  &:hover {
+    color: #219ebc;
+    text-decoration: underline;
+  }
+}
+
+td {
+  background-color: #fafafa;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .bookcard {
+    &_container {
+      width: 100%;
+      justify-content: center;
+    }
+
+    &_img {
+      width: 40px;
+      height: 60px;
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+  }
+
+  .cover-cell,
+  .id-cell {
+    display: none;
+  }
+}

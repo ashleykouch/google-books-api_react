@@ -1,0 +1,100 @@
+$mobile-breakpoint: 768px;
+
+.searchbar {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+
+  &_title {
+    margin-bottom: 25px;
+    width: 650px;
+    &_header {
+      font-size: 40px;
+      margin-bottom: 25px;
+    }
+    &_subheader {
+      font-size: 25px;
+    }
+  }
+
+  &_form {
+    width: 650px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &_input {
+      width: 400px;
+      height: 30px;
+      border: 2px solid #219ebc;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+  }
+
+  &_button {
+    width: 100px;
+    height: 30px;
+    border: 2px solid #219ebc;
+    font-size: 16px;
+    box-shadow: 1px 4px #999;
+
+    &:hover {
+      background-color: #219ebc;
+      color: white;
+    }
+
+    &:active {
+      background-color: #219ebc;
+      color: white;
+      box-shadow: 0.5px 2px #666;
+      transform: translateY(4px);
+    }
+  }
+
+  &_filter {
+    width: 150px;
+    height: 30px;
+    border: 2px solid #219ebc;
+    font-size: 16px;
+    box-shadow: 1px 4px #999;
+
+    &:hover {
+      background-color: #219ebc;
+      color: white;
+    }
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .searchbar {
+    &_title {
+      width: 100%;
+      text-align: center;
+      padding: 0.15px;
+
+      &_header {
+        font-size: 30px;
+      }
+
+      &subheader {
+        font-size: 18px;
+      }
+    }
+
+    &_form {
+      width: 100%;
+      flex-direction: column;
+      padding: 0 15px;
+
+      &_input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
