@@ -95,6 +95,7 @@ By following this design goal and approach, the project will deliver a user-frie
 ## Known issues
 
 - Contact form is for display and does not yet collect data
+- Tried to deploy to github pages and even though the branch created, the page is not releasing.
 
 ---
 

@@ -2,6 +2,7 @@
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@jest/transform": "^29.5.0",
+    "gh-pages": "^5.0.0",
     "jest-environment-jsdom": "^29.5.0",
     "ts-jest": "^29.1.0"
   }
